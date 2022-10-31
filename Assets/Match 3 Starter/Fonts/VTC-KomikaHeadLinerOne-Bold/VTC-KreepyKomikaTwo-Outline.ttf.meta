@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: c2590732653e54619a362c0ed720fbf5
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - VTC-KomikaHeadLinerTwo
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 80f9ab4272be24d76a1d81d788ba1b92, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
