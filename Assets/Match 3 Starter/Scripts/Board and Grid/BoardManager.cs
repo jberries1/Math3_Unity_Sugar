@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class BoardManager : MonoBehaviour {
 	public static BoardManager instance;
@@ -9,14 +10,18 @@ public class BoardManager : MonoBehaviour {
 	public int xSize, ySize; // размеры платы по осям X и Y.
 
 	public GameObject[,] tiles; //массив для хранения тайлов на доске
-
+	Tile tiles1;
 	public bool IsShifting { get; set; } // сообщит игре, когда будет найдено совпадение и поле снова заполнится.
 
 	void Start () {
 		instance = GetComponent<BoardManager>();//устанавливает синглтон со ссылкой на файл BoardManager
 		Vector2 offset = tile.GetComponent<SpriteRenderer>().bounds.size;
 		CreateBoard(offset.x , offset.y );//Размеры ячейки берем из размера спрайта 
+	}
 
+	void Update()
+	{
+		/*Debug.Log(Tile.xren);*/
 	}
 	public IEnumerator FindNullTiles()
 	{
@@ -53,6 +58,7 @@ public class BoardManager : MonoBehaviour {
 			{ //Сохраните количество пробелов в целом числе с именем nullCount.	
 				nullCount++;
 			}
+
 			renders.Add(render);
 		}
 
@@ -67,7 +73,9 @@ public class BoardManager : MonoBehaviour {
 				renders[k + 1].sprite = GetNewSprite(x, ySize - 1);
 			}
 		}
-		IsShifting = false;
+        
+
+        IsShifting = false;
 	}
 	private Sprite GetNewSprite(int x, int y)
 	{
@@ -86,13 +94,9 @@ public class BoardManager : MonoBehaviour {
 		{
 			possibleCharacters.Remove(tiles[x, y - 1].GetComponent<SpriteRenderer>().sprite);
 		}
-
-		return possibleCharacters[Random.Range(0, possibleCharacters.Count)];
-	}
-
-
-
-
+        return possibleCharacters[Random.Range(0, possibleCharacters.Count)];
+        
+    }
 	private void CreateBoard (float xOffset, float yOffset) {
 		tiles = new GameObject[xSize, ySize]; //В CreateBoard()2D - массив tilesинициализируется.
 		float startX = transform.position.x;//Общедоступные начальные данные для получения доски
@@ -117,16 +121,23 @@ public class BoardManager : MonoBehaviour {
 
 
 				Sprite newSprite = possibleCharacters[Random.Range(0, possibleCharacters.Count)];//Случайным образом выберите спрайт из тех, которые вы ранее перетащили
-				newTile.GetComponent<SpriteRenderer>().sprite = newSprite; //Set the newly created tile's sprite to the randomly chosen sprite.
-
-
-
+				newTile.GetComponent<SpriteRenderer>().sprite = newSprite; //Установливает спрайт вновь созданной плитки на случайно выбранный спрайт.
 				previousLeft[y] = newSprite;
 				previousBelow = newSprite;
-
 
 			}
 		}
 
 	}
+	public enum SpriteName
+	{
+		Donut,
+		Chocolate,
+		BubleGum,
+		IceCream,
+		Lollipop
+	}
+	
+	private int[] ScoreSprite = new int[5];
+	
 }

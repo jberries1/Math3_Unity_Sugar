@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -11,11 +12,24 @@ public class GUIManager : MonoBehaviour {
 
 	public Text scoreTxt;
 	public Text moveCounterTxt;
+	
 
 	public int moveCounter;
 
-	private int score;
 
+	private int score;
+	
+	public Text SpriteTxt;
+
+	[SerializeField] private string nameScoreSprite;
+	private int scoreSprite;
+
+
+	private void Update()
+	{
+		
+	}
+	
 	public int Score
 	{
 		get
@@ -30,6 +44,23 @@ public class GUIManager : MonoBehaviour {
 		}
 	}
 
+	public int askdalsk
+	{
+		get
+		{
+			return scoreSprite;
+		}
+		set
+		{
+			score = value;
+			if (Tile.kringe == "BubleGum")
+			{
+				scoreSprite++;
+			}
+
+			SpriteTxt.text = scoreSprite.ToString();
+		}
+	}
 	public int MoveCounter
 	{
 		get
@@ -39,6 +70,7 @@ public class GUIManager : MonoBehaviour {
 
 		set
 		{
+			
 			moveCounter = value;
 			if (moveCounter <= 0)
 			{
